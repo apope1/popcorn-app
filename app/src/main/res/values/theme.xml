@@ -13,7 +13,7 @@
     <style name="BaseTheme.App" />
 
     <style name="BaseTheme.App.Splash">
-        <item name="android:windowBackground">@mipmap/ic_launcher</item>
+        <item name="android:windowBackground">@drawable/img_splash</item>
     </style>
 
 
