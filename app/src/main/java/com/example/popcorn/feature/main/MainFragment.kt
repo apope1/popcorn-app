@@ -2,6 +2,7 @@ package com.example.popcorn.feature.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.example.popcorn.R
@@ -20,9 +21,7 @@ class MainFragment : PopcornFragment<MainBinding, MainViewModel>(R.layout.fragme
             addCellFactories(TrendingItemFactory())
         }
         binding.trendingList.adapter = trendingAdapter
-        viewModel.uiModels.observe(viewLifecycleOwner) {
-            trendingAdapter.submitList(it)
-        }
+        viewModel.uiModels.observe(viewLifecycleOwner, Observer(trendingAdapter::submitList))
         viewModel.event.observe(viewLifecycleOwner) {
             when (it.consume()) {
                 is MainViewModel.Action.NavigateSearch -> {

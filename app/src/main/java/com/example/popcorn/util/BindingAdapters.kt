@@ -24,3 +24,11 @@ fun EditText.onKeyDone(listener: () -> Unit) {
         return@setOnEditorActionListener false
     }
 }
+
+@BindingAdapter("imageUrl")
+fun ImageView.loadImage(url: String?) {
+    Glide.with(this.context)
+        .load(url)
+        .centerCrop()
+        .into(this)
+}

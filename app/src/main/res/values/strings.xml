@@ -2,4 +2,6 @@
     <string name="app_name">Popcorn</string>
     <string name="trending_movies">Trending movies</string>
     <string name="view_all">view all</string>
+    <string name="max_score">/10</string>
+    <string name="rate_this">Rate\nThis</string>
 </resources>

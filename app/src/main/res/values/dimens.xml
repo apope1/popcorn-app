@@ -7,4 +7,7 @@
     <dimen name="trending_movie_height">160dp</dimen>
     <dimen name="main_screen_logo_width">100dp</dimen>
     <dimen name="main_screen_logo_height">120dp</dimen>
+    <dimen name="divider_margin">2dp</dimen>
+    <dimen name="tiny_text_size">8sp</dimen>
+    <dimen name="icon_size">56dp</dimen>
 </resources>
