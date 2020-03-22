@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="BaseTheme.App" />
+
+    <style name="BaseTheme.App.Splash">
+        <item name="android:windowBackground">@mipmap/ic_launcher</item>
+    </style>
+
+
+</resources>

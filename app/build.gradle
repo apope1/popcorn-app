@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+
+    defaultConfig {
+        applicationId "com.example.popcorn"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        debug {
+            versionNameSuffix "-dev"
+        }
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":core")
+
+    // Lifecycle, LiveData, ViewModel
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+
+    // AndroidX support
+    implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.core:core-ktx:$coreVersion"
+    implementation "androidx.fragment:fragment:1.2.0-rc04"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    // Koin
+    implementation "org.koin:koin-androidx-scope:$koinVersion"
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+
+    // Image handling
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation 'com.github.bumptech.glide:annotations:4.10.0'
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+}

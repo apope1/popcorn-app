@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+}
+
+dependencies {
+    // Kotlin + Coroutines
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+
+    //Koin
+    implementation "org.koin:koin-core:$koinVersion"
+    api "org.koin:koin-android:$koinVersion"
+
+
+    // Moshi
+    implementation("com.squareup.moshi:moshi:$moshiVersion")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+}
