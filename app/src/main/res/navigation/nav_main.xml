@@ -8,7 +8,11 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.popcorn.feature.main.MainFragment" />
+        android:name="com.example.popcorn.feature.main.MainFragment">
+        <action
+            android:id="@+id/main_to_searchResult"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/searchResultFragment"

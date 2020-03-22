@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="second_keyline">24dp</dimen>
+    <dimen name="content_padding">8dp</dimen>
+    <dimen name="first_keyline">16dp</dimen>
+    <dimen name="trending_movie_width">100dp</dimen>
+    <dimen name="trending_movie_height">160dp</dimen>
+    <dimen name="main_screen_logo_width">100dp</dimen>
+    <dimen name="main_screen_logo_height">120dp</dimen>
+</resources>

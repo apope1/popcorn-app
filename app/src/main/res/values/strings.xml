@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Popcorn</string>
+    <string name="trending_movies">Trending movies</string>
+    <string name="view_all">view all</string>
 </resources>

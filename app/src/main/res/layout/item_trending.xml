@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="TrendingItemBinding">
+
+        <variable
+            name="uiModel"
+            type="com.example.popcorn.feature.main.uimodels.TrendingItemUiModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/content_padding"
+        app:cardElevation="8dp">
+
+        <ImageView
+            android:layout_width="@dimen/trending_movie_width"
+            android:layout_height="@dimen/trending_movie_height"
+            app:thumbnail="@{uiModel.imageResource}"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/img_trending_one" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

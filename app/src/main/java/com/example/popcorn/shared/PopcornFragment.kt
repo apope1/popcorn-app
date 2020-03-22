@@ -31,12 +31,6 @@ abstract class PopcornFragment<VB : ViewDataBinding, VM : ViewModel>(@LayoutRes 
             binding = it
         }.root
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        // There are multiple glitches throughout the app where insets wouldn't get applied and the UI elements wouldn't be positioned properly. I'm not
-        // sure why this is happening, but until we investigate, this solves the issue:
-        with(binding.root) { post { requestLayout() } }
-    }
-
     override fun onPause() {
         super.onPause()
         dismissKeyboard(binding.root)
@@ -46,11 +40,8 @@ abstract class PopcornFragment<VB : ViewDataBinding, VM : ViewModel>(@LayoutRes 
         requireActivity().onBackPressedDispatcher.addCallback(this) { func.invoke() }
 
 
-    protected fun dismissKeyboard(view: View) =
+    private fun dismissKeyboard(view: View) =
         (view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
-
-    protected fun showKeyboard(view: View) =
-        (view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
 
 
 }
