@@ -21,6 +21,9 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
     private val _event = MutableLiveData<Event<Action>>()
     val event: LiveData<Event<Action>> get() = _event
 
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading: LiveData<Boolean> get() = _loading
+
     init {
         getTrendingMovies()
     }
@@ -31,16 +34,18 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
 
     fun search() {
         viewModelScope.launch {
+            _loading.value = true
             when (val result = searchMovies(searchText.value)) {
                 is Result.Success -> {
                     if (result.value.isNullOrEmpty()) {
-                        Unit
+                        _event.value = Event(Action.ShowAlert)
                     } else {
                         result.value?.let { onSearchResult(it) }
                     }
                 }
-                is Result.Error -> Unit
+                is Result.Error -> _event.value = Event(Action.ShowAlert)
             }
+            _loading.value = false
         }
     }
 
@@ -55,5 +60,6 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
 
     sealed class Action {
         data class NavigateSearch(val results: List<Movie>) : Action()
+        object ShowAlert : Action()
     }
 }

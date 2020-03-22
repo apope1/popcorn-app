@@ -19,7 +19,11 @@
         android:name="com.example.popcorn.feature.searchresult.SearchResultFragment">
         <action
             android:id="@+id/searchResult_to_movieDetail"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/nav_main" />
         <argument
             android:name="searchResults"
             app:argType="com.example.app.core.model.Movie[]" />
@@ -30,6 +34,10 @@
 
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.example.popcorn.feature.detail.MovieDetailFragment" />
+        android:name="com.example.popcorn.feature.detail.MovieDetailFragment">
+        <argument
+            android:name="movie"
+            app:argType="com.example.popcorn.feature.searchresult.uimodels.MovieUiModel" />
+    </fragment>
 
 </navigation>

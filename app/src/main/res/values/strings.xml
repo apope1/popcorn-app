@@ -4,4 +4,8 @@
     <string name="view_all">view all</string>
     <string name="max_score">/10</string>
     <string name="rate_this">Rate\nThis</string>
+    <string name="hint">Find the movie</string>
+    <string name="alert_title">No results</string>
+    <string name="alert_message">The query produced no results. Please search for something else.</string>
+    <string name="ok">OK</string>
 </resources>

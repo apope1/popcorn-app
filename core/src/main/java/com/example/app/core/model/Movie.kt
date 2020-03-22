@@ -11,15 +11,17 @@ data class Movie(
     @Json(name = "id")
     val id: Int,
     @Json(name = "poster_path")
-    val posterUrl: String,
+    val posterUrl: String?,
+    @Json(name = "backdrop_path")
+    val backdropUrl: String?,
     @Json(name = "title")
-    val title: String,
+    val title: String?,
     @Json(name = "release_date")
-    val releaseDate: String,
+    val releaseDate: String?,
     @Json(name = "vote_average")
-    val voteAverage: Float,
+    val voteAverage: Float?,
     @Json(name = "vote_count")
-    val voteCount: Int,
+    val voteCount: Int?,
     @Json(name = "overview")
-    val overview: String
+    val overview: String?
 ) : Parcelable

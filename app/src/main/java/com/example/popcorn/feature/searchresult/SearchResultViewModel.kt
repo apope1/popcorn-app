@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.app.core.model.Movie
-import com.example.popcorn.feature.searchresult.uimodels.SearchResultUiModel
+import com.example.popcorn.feature.searchresult.uimodels.MovieUiModel
 import com.example.popcorn.util.Event
 import com.halcyonmobile.typedrecyclerviewadapter.RecyclerItem
 
@@ -16,7 +16,7 @@ class SearchResultViewModel(searchResults: Array<Movie>, val query: String) : Vi
     val event: LiveData<Event<Action>> get() = _event
 
     init {
-        _uiModels.value = searchResults.map { SearchResultUiModel.map(it) }
+        _uiModels.value = searchResults.map { MovieUiModel.map(it) }
     }
 
     fun navigateUp() {

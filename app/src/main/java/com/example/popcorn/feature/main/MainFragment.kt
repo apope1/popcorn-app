@@ -1,5 +1,6 @@
 package com.example.popcorn.feature.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -35,6 +36,14 @@ class MainFragment : PopcornFragment<MainBinding, MainViewModel>(R.layout.fragme
                             )
                         )
                     }
+                }
+                is MainViewModel.Action.ShowAlert -> {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.alert_title))
+                        .setMessage(getString(R.string.alert_message))
+                        .setPositiveButton(getString(R.string.ok)) { dialog, _ -> dialog.dismiss() }
+                        .create()
+                        .show()
                 }
             }
         }

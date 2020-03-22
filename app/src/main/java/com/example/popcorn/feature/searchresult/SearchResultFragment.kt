@@ -22,7 +22,12 @@ class SearchResultFragment : PopcornFragment<SearchResultBinding, SearchResultVi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val resultsAdapter = RecyclerAdapter().apply {
-            addCellFactories(SearchResultItemFactory {})
+            addCellFactories(SearchResultItemFactory {
+                val navController = findNavController()
+                if (navController.currentDestination?.id == R.id.searchResultFragment) {
+                    navController.navigate(SearchResultFragmentDirections.searchResultToMovieDetail(it))
+                }
+            })
         }
         binding.resultList.adapter = resultsAdapter
         viewModel.uiModels.observe(viewLifecycleOwner, Observer(resultsAdapter::submitList))

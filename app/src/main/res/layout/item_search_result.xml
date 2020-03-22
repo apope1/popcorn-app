@@ -7,7 +7,7 @@
 
         <variable
             name="uiModel"
-            type="com.example.popcorn.feature.searchresult.uimodels.SearchResultUiModel" />
+            type="com.example.popcorn.feature.searchresult.uimodels.MovieUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
