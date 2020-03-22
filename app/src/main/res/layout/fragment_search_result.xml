@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/second_keyline"
             android:fontFamily="@font/lato_light"
+            android:text="@{viewModel.query}"
             android:textAppearance="?attr/textAppearanceHeadline3"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"

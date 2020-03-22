@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -30,6 +31,7 @@ android {
 
 }
 
+
 dependencies {
     // Kotlin + Coroutines
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
@@ -39,6 +41,7 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
 
     //Koin
     implementation "org.koin:koin-core:$koinVersion"
@@ -48,4 +51,9 @@ dependencies {
     // Moshi
     implementation("com.squareup.moshi:moshi:$moshiVersion")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion")
+
+    implementation "com.halcyonmobile.oauth-setup:oauth-setup-moshi-koin:0.1.0.14"
+
+    implementation "com.halcyonmobile.retrofit-error-parsing:retrofit-error-parsing:0.1.0.1"
+
 }

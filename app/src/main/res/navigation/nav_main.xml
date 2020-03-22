@@ -16,7 +16,17 @@
 
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.example.popcorn.feature.searchresult.SearchResultFragment" />
+        android:name="com.example.popcorn.feature.searchresult.SearchResultFragment">
+        <action
+            android:id="@+id/searchResult_to_movieDetail"
+            app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="searchResults"
+            app:argType="com.example.app.core.model.Movie[]" />
+        <argument
+            android:name="query"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieDetailFragment"

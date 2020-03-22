@@ -53,7 +53,7 @@
                     android:maxLines="1"
                     android:text="@={viewModel.searchText}"
                     android:textAppearance="?attr/textAppearanceHeadline4"
-                    app:onKeyDone="@{() -> viewModel.onSerchResult()}"
+                    app:onKeyDone="@{() -> viewModel.search()}"
                     tools:hint="Find the movie" />
             </com.google.android.material.textfield.TextInputLayout>
 

@@ -1,5 +1,7 @@
 package com.example.popcorn
 
+import com.example.app.core.createCoreModules
+import com.example.app.core.model.Movie
 import com.example.popcorn.feature.HomeViewModel
 import com.example.popcorn.feature.detail.MovieDetailViewModel
 import com.example.popcorn.feature.main.MainViewModel
@@ -16,11 +18,11 @@ private val homeModule = module {
 }
 
 private val mainModule = module {
-    viewModel { MainViewModel() }
+    viewModel { MainViewModel(searchMovies = get()) }
 }
 
 private val searchResultModule = module {
-    viewModel { SearchResultViewModel() }
+    viewModel { (searchResults: Array<Movie>, query: String) -> SearchResultViewModel(searchResults = searchResults, query = query) }
 }
 
 private val movieDetailModule = module {
@@ -33,4 +35,4 @@ fun createAppModules() = listOf(
     searchResultModule,
     movieDetailModule,
     mainModule
-)
+).plus(createCoreModules())

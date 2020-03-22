@@ -23,11 +23,17 @@ class MainFragment : PopcornFragment<MainBinding, MainViewModel>(R.layout.fragme
         binding.trendingList.adapter = trendingAdapter
         viewModel.uiModels.observe(viewLifecycleOwner, Observer(trendingAdapter::submitList))
         viewModel.event.observe(viewLifecycleOwner) {
-            when (it.consume()) {
+            when (val result = it.consume()) {
                 is MainViewModel.Action.NavigateSearch -> {
                     val navController = findNavController()
                     if (navController.currentDestination?.id == R.id.mainFragment) {
-                        navController.navigate(MainFragmentDirections.mainToSearchResult())
+                        val results = result.results.toTypedArray()
+                        navController.navigate(
+                            MainFragmentDirections.mainToSearchResult(
+                                searchResults = results,
+                                query = viewModel.searchText.value.orEmpty()
+                            )
+                        )
                     }
                 }
             }
