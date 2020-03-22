@@ -10,4 +10,12 @@
         android:id="@+id/mainFragment"
         android:name="com.example.popcorn.feature.main.MainFragment" />
 
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.popcorn.feature.searchresult.SearchResultFragment" />
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.popcorn.feature.detail.MovieDetailFragment" />
+
 </navigation>
