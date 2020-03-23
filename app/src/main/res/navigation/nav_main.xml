@@ -22,8 +22,7 @@
             app:destination="@id/movieDetailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/nav_main" />
+            app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="searchResults"
             app:argType="com.example.app.core.model.Movie[]" />
@@ -38,6 +37,12 @@
         <argument
             android:name="movie"
             app:argType="com.example.popcorn.feature.searchresult.uimodels.MovieUiModel" />
+        <action
+            android:id="@+id/detail_to_main"
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_main"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

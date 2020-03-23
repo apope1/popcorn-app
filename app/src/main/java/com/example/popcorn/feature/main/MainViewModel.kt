@@ -8,12 +8,13 @@ import com.example.app.core.Result
 import com.example.app.core.model.Movie
 import com.example.app.core.usecase.SearchMoviesUseCase
 import com.example.popcorn.R
+import com.example.popcorn.SharedPreferenceManager
 import com.example.popcorn.feature.main.uimodels.TrendingItemUiModel
 import com.example.popcorn.util.Event
 import com.halcyonmobile.typedrecyclerviewadapter.RecyclerItem
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel() {
+class MainViewModel(private val searchMovies: SearchMoviesUseCase, private val preferenceManager: SharedPreferenceManager) : ViewModel() {
     val searchText = MutableLiveData<String>()
     private val _uiModels = MutableLiveData<List<RecyclerItem>>()
     val uiModels: LiveData<List<RecyclerItem>> get() = _uiModels
@@ -28,19 +29,21 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
         getTrendingMovies()
     }
 
-    private fun onSearchResult(results: List<Movie>) {
-        _event.value = Event(Action.NavigateSearch(results))
-    }
+    fun getSuggestions() = preferenceManager.suggestions
 
-    fun search() {
+    fun search(query: String? = null) {
+        val searchQuery = query.orEmpty()
         viewModelScope.launch {
             _loading.value = true
-            when (val result = searchMovies(searchText.value)) {
+            when (val result = searchMovies(searchQuery)) {
                 is Result.Success -> {
                     if (result.value.isNullOrEmpty()) {
                         _event.value = Event(Action.ShowAlert)
                     } else {
-                        result.value?.let { onSearchResult(it) }
+                        if (searchQuery.isNotEmpty()) {
+                            preferenceManager.suggestions = setOf(searchQuery).plus(preferenceManager.suggestions.take(MAX_SUGGESTIONS_NUMBER))
+                        }
+                        result.value?.let { _event.value = Event(Action.NavigateSearch(it)) }
                     }
                 }
                 is Result.Error -> _event.value = Event(Action.ShowAlert)
@@ -61,5 +64,9 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
     sealed class Action {
         data class NavigateSearch(val results: List<Movie>) : Action()
         object ShowAlert : Action()
+    }
+
+    companion object {
+        private const val MAX_SUGGESTIONS_NUMBER = 9
     }
 }

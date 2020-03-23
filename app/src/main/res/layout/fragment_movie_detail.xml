@@ -90,7 +90,8 @@
                 android:layout_margin="@dimen/first_keyline"
                 android:src="@drawable/ic_heart"
                 app:layout_constraintBottom_toBottomOf="@id/backdrop"
-                app:layout_constraintStart_toStartOf="@id/backdrop" />
+                app:layout_constraintStart_toStartOf="@id/backdrop"
+                tools:ignore="ContentDescription" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

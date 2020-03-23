@@ -19,7 +19,7 @@ private val homeModule = module {
 }
 
 private val mainModule = module {
-    viewModel { MainViewModel(searchMovies = get()) }
+    viewModel { MainViewModel(searchMovies = get(), preferenceManager = get()) }
 }
 
 private val searchResultModule = module {

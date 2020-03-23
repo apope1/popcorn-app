@@ -23,7 +23,7 @@ class MovieDetailFragment : PopcornFragment<MovieDetailBinding, MovieDetailViewM
                 is MovieDetailViewModel.Action.NavigateUp -> {
                     val navController = findNavController()
                     if (navController.currentDestination?.id == R.id.movieDetailFragment) {
-                        navController.navigateUp()
+                        navController.navigate(MovieDetailFragmentDirections.detailToMain())
                     }
                 }
             }

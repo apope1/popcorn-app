@@ -7,63 +7,29 @@ import kotlin.reflect.KProperty
 
 class SharedPreferenceManager private constructor(val sharedPreferences: SharedPreferences) {
 
-    constructor(context: Context, key: String = PREFERENCES_KEY): this(createSharedPreferences(context, key))
+    constructor(context: Context, key: String = PREFERENCES_KEY) : this(createSharedPreferences(context, key))
+
+    var suggestions by PreferenceFieldDelegate.Set(SUGGESTIONS_KEY)
 
     companion object {
         const val PREFERENCES_KEY = "preferences"
+        const val SUGGESTIONS_KEY = "suggestions"
 
-        fun createSharedPreferences(context: Context, key: String): SharedPreferences =
-            context.getSharedPreferences(key, Context.MODE_PRIVATE)
+        fun createSharedPreferences(context: Context, key: String): SharedPreferences = context.getSharedPreferences(key, Context.MODE_PRIVATE)
     }
 }
 
-private sealed class PreferenceFieldDelegate<T>(protected val key: () -> kotlin.String, protected val defaultValue: T) :
+private sealed class PreferenceFieldDelegate<T>(protected val key: () -> String, protected val defaultValue: T) :
     ReadWriteProperty<SharedPreferenceManager, T> {
 
-    constructor(key: kotlin.String, defaultValue: T) : this({ key }, defaultValue)
+    constructor(key: String, defaultValue: T) : this({ key }, defaultValue)
 
-    class Boolean(key: () -> kotlin.String, defaultValue: kotlin.Boolean = false) : PreferenceFieldDelegate<kotlin.Boolean>(key, defaultValue) {
-
-        constructor(key: kotlin.String, defaultValue: kotlin.Boolean = false) : this({ key }, defaultValue)
-
+    class Set(key: String, defaultValue: kotlin.collections.Set<String> = emptySet()) :
+        PreferenceFieldDelegate<kotlin.collections.Set<String>>(key, defaultValue) {
         override fun getValue(thisRef: SharedPreferenceManager, property: KProperty<*>) =
-            thisRef.sharedPreferences.getBoolean(key(), defaultValue)
+            thisRef.sharedPreferences.getStringSet(key(), defaultValue)?.toSet() ?: defaultValue
 
-        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.Boolean) =
-            thisRef.sharedPreferences.edit().putBoolean(key(), value).apply()
+        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.collections.Set<String>) =
+            thisRef.sharedPreferences.edit().putStringSet(key(), value).apply()
     }
-
-    class Int(key: kotlin.String, defaultValue: kotlin.Int = 0) : PreferenceFieldDelegate<kotlin.Int>(key, defaultValue) {
-        override fun getValue(thisRef: SharedPreferenceManager, property: KProperty<*>) =
-            thisRef.sharedPreferences.getInt(key(), defaultValue)
-
-        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.Int) =
-            thisRef.sharedPreferences.edit().putInt(key(), value).apply()
-    }
-
-    class String(key: kotlin.String, defaultValue: kotlin.String = "") : PreferenceFieldDelegate<kotlin.String>(key, defaultValue) {
-        override fun getValue(thisRef: SharedPreferenceManager, property: KProperty<*>) =
-            thisRef.sharedPreferences.getString(key(), defaultValue)
-                ?: defaultValue
-
-        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.String) =
-            thisRef.sharedPreferences.edit().putString(key(), value).apply()
-    }
-
-    class Float(key: kotlin.String, defaultValue: kotlin.Float = 0F) : PreferenceFieldDelegate<kotlin.Float>(key, defaultValue) {
-        override fun getValue(thisRef: SharedPreferenceManager, property: KProperty<*>) =
-            thisRef.sharedPreferences.getFloat(key(), defaultValue)
-
-        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.Float) =
-            thisRef.sharedPreferences.edit().putFloat(key(), value).apply()
-    }
-
-    class Long(key: kotlin.String, defaultValue: kotlin.Long = 0L) : PreferenceFieldDelegate<kotlin.Long>(key, defaultValue) {
-        override fun getValue(thisRef: SharedPreferenceManager, property: KProperty<*>) =
-            thisRef.sharedPreferences.getLong(key(), defaultValue)
-
-        override fun setValue(thisRef: SharedPreferenceManager, property: KProperty<*>, value: kotlin.Long) =
-            thisRef.sharedPreferences.edit().putLong(key(), value).apply()
-    }
-
 }
