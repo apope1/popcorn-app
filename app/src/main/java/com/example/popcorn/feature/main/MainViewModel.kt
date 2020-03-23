@@ -28,7 +28,7 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
         getTrendingMovies()
     }
 
-    fun onSearchResult(results: List<Movie>) {
+    private fun onSearchResult(results: List<Movie>) {
         _event.value = Event(Action.NavigateSearch(results))
     }
 
@@ -51,10 +51,10 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase) : ViewModel()
 
     private fun getTrendingMovies() {
         _uiModels.value = listOf(
-            TrendingItemUiModel("1", R.drawable.img_trending_one),
-            TrendingItemUiModel("2", R.drawable.img_trending_two),
-            TrendingItemUiModel("3", R.drawable.img_trending_three),
-            TrendingItemUiModel("4", R.drawable.img_trending_four)
+            TrendingItemUiModel(R.drawable.img_trending_one),
+            TrendingItemUiModel(R.drawable.img_trending_two),
+            TrendingItemUiModel(R.drawable.img_trending_three),
+            TrendingItemUiModel(R.drawable.img_trending_four)
         )
     }
 

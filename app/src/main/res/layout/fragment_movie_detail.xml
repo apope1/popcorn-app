@@ -83,6 +83,15 @@
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/img_trending_two" />
 
+            <ImageView
+                android:id="@+id/favorite_icon"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_margin="@dimen/first_keyline"
+                android:src="@drawable/ic_heart"
+                app:layout_constraintBottom_toBottomOf="@id/backdrop"
+                app:layout_constraintStart_toStartOf="@id/backdrop" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
