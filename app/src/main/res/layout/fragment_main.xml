@@ -47,8 +47,6 @@
                     android:id="@+id/search_input"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:drawablePadding="@dimen/content_padding"
                     android:fontFamily="@font/lato_bold"
                     android:hint="@string/hint"
                     android:imeOptions="actionDone"
@@ -58,6 +56,18 @@
                     android:textAppearance="?attr/textAppearanceHeadline4"
                     app:onKeyDone="@{() -> viewModel.search(viewModel.searchText)}" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:onClick="@{() -> viewModel.search(viewModel.searchText)}"
+                android:padding="@dimen/content_padding"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@id/search_layout"
+                app:layout_constraintEnd_toEndOf="@id/search_layout"
+                app:layout_constraintTop_toTopOf="@id/search_layout"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/trending_label"

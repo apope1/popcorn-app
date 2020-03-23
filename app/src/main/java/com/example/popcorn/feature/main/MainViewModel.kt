@@ -33,22 +33,24 @@ class MainViewModel(private val searchMovies: SearchMoviesUseCase, private val p
 
     fun search(query: String? = null) {
         val searchQuery = query.orEmpty()
-        viewModelScope.launch {
-            _loading.value = true
-            when (val result = searchMovies(searchQuery)) {
-                is Result.Success -> {
-                    if (result.value.isNullOrEmpty()) {
-                        _event.value = Event(Action.ShowAlert)
-                    } else {
-                        if (searchQuery.isNotEmpty()) {
-                            preferenceManager.suggestions = setOf(searchQuery).plus(preferenceManager.suggestions.take(MAX_SUGGESTIONS_NUMBER))
+        if (searchQuery.isNotBlank()) {
+            viewModelScope.launch {
+                _loading.value = true
+                when (val result = searchMovies(searchQuery)) {
+                    is Result.Success -> {
+                        if (result.value.isNullOrEmpty()) {
+                            _event.value = Event(Action.ShowAlert)
+                        } else {
+                            if (searchQuery.isNotEmpty()) {
+                                preferenceManager.suggestions = setOf(searchQuery).plus(preferenceManager.suggestions.take(MAX_SUGGESTIONS_NUMBER))
+                            }
+                            result.value?.let { _event.value = Event(Action.NavigateSearch(it)) }
                         }
-                        result.value?.let { _event.value = Event(Action.NavigateSearch(it)) }
                     }
+                    is Result.Error -> _event.value = Event(Action.ShowAlert)
                 }
-                is Result.Error -> _event.value = Event(Action.ShowAlert)
+                _loading.value = false
             }
-            _loading.value = false
         }
     }
 
