@@ -2,7 +2,7 @@
 
 This Popcorn App excercise is an app that allows users to search for movies from an online movie database.
 
-For the development of this app I use Kotlin as the programming language.
+For the development of this app I used Kotlin as the programming language.
 
 I used Koin for dependency injection, Retrofit and Moshi for API calls and JSON parsing.
 
