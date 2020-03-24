@@ -11,3 +11,5 @@ For the "front-end" part I used Glide for image processing, the android Navigati
 The main problems I came upon while developing this app were that the assets provided had very big sizes and also the dimensions on Invision were incredilby huge so I had to use some internal downscaled sizes (following Material Guidelines of course).
 
 Another problem I came upon was that some data we could see on Invision was not available on the provided API so I decided to not create some random values so I just did not display anything in their place.
+
+Completing this test took me in total around 12-14 hours (I worked one day during the weekend and refined what I accomplished then during my working days when I had some free time).
